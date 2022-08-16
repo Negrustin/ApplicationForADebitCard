@@ -21,8 +21,8 @@ public class NameValidationTest extends BaseTest{
         ApplicationForADebitCardPage page = new ApplicationForADebitCardPage();
         SuccessPage successPage = new SuccessPage();
         Selenide.open(BASE_URL);
-        page.sendKeysOfString(page.getNameInput(),name);
-        page.sendKeysOfString(page.getPhoneInput(),PHONE_NUMBER);
+        page.sendKeysOfString(page.getNameInput(), name);
+        page.sendKeysOfString(page.getPhoneInput(), PHONE_NUMBER);
         page.getCheckBox().click();
         page.getButton().click();
 

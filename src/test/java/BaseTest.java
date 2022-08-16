@@ -14,12 +14,14 @@ public class BaseTest {
 
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeEach
     void setUp() {
         Configuration.browser = "chrome";
         Configuration.driverManagerEnabled = true;
 
     }
+
     @AfterEach
     void tearDown() {
 
