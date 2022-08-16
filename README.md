@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/4quax94f6mym8llm?svg=true)](https://ci.appveyor.com/project/Negrustin/applicationforadebitcard)
