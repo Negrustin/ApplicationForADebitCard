@@ -1,9 +1,9 @@
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-public class PhoneValidationTest extends BaseTest {
+public class PhoneValidationTest {
 
     private static final String BASE_URL = "http://localhost:9999";
 
@@ -11,17 +11,19 @@ public class PhoneValidationTest extends BaseTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "phones.csv", numLinesToSkip = 1, emptyValue = "")
-    void stetNegativePhoneInput(String phone) {
-        ApplicationForADebitCardPage page = new ApplicationForADebitCardPage();
-        SuccessPage successPage = new SuccessPage();
-        Selenide.open(BASE_URL);
-        page.sendKeysOfString(page.getNameInput(), FULL_NAME);
-        page.sendKeysOfString(page.getPhoneInput(), phone);
-        page.getCheckBox().click();
-        page.getButton().click();
+    void stetNegativePhoneInput(String phone, String errorMassage) {
+        ApplicationForADebitCardPage page = new ApplicationForADebitCardPage(BASE_URL);
 
-        boolean expected = false;
-        boolean actual = successPage.getSuccessMsg().exists();
+
+        page.setName(FULL_NAME);
+        page.setPhoneNumber(phone);
+        page.clickToCheckBox();
+        page.clickToContinueButton();
+
+        boolean expected = true;
+        boolean actual = page.getErrorMassagePhoneElement(errorMassage)
+                .shouldBe(Condition.visible)
+                .exists();
 
         Assertions.assertEquals(expected, actual);
 

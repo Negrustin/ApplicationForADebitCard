@@ -1,9 +1,11 @@
 
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class HappyPathTest extends BaseTest{
+
+
+public class HappyPathTest {
     private static  final String BASE_URL = "http://localhost:9999";
 
     private static final String FULL_NAME = "Иванов Иван";
@@ -11,18 +13,21 @@ public class HappyPathTest extends BaseTest{
 
     @Test
     public void HappyPathTest(){
-        ApplicationForADebitCardPage page = new ApplicationForADebitCardPage();
+        ApplicationForADebitCardPage page = new ApplicationForADebitCardPage(BASE_URL);
         SuccessPage successPage = new SuccessPage();
-        Selenide.open(BASE_URL);
-        page.sendKeysOfString(page.getNameInput(), FULL_NAME);
-        page.sendKeysOfString(page.getPhoneInput(),PHONE_NUMBER);
-        page.getCheckBox().click();
-        page.getButton().click();
 
-       boolean expected = true;
-       boolean actual = successPage.getSuccessMsg().exists();
+        page.setName(FULL_NAME);
+        page.setPhoneNumber(PHONE_NUMBER);
+        page.clickToCheckBox();
+        page.clickToContinueButton();
 
-       Assertions.assertEquals(expected,actual);
+        boolean expected = true;
+        boolean actual = successPage.getSuccessMsg()
+                .shouldHave(Condition.text("Ваша заявка успешно отправлена"))
+                .shouldBe(Condition.visible).exists();
+
+
+        Assertions.assertEquals(expected,actual);
 
     }
 
