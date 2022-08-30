@@ -1,5 +1,8 @@
+package ru.netology.test;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.netology.page.ApplicationForADebitCardPage;
 
 public class TheCheckBoxIsNotSelectedTest {
 

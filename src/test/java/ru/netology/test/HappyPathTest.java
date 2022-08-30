@@ -1,8 +1,10 @@
+package ru.netology.test;
 
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import ru.netology.page.ApplicationForADebitCardPage;
+import ru.netology.page.SuccessPage;
 
 
 public class HappyPathTest {

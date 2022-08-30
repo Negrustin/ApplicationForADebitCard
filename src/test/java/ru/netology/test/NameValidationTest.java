@@ -1,9 +1,12 @@
+package ru.netology.test;
+
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-
+import ru.netology.page.ApplicationForADebitCardPage;
+import ru.netology.page.SuccessPage;
 
 
 public class NameValidationTest {
@@ -16,7 +19,7 @@ public class NameValidationTest {
 
 
     @ParameterizedTest
-    @CsvFileSource(resources = "names.csv",numLinesToSkip = 1,emptyValue = "")
+    @CsvFileSource(resources = "../../../names.csv",numLinesToSkip = 1,emptyValue = "")
 
     void negativeNameValidation(String name, String errorMessage){
         ApplicationForADebitCardPage page = new ApplicationForADebitCardPage(BASE_URL);
@@ -26,11 +29,7 @@ public class NameValidationTest {
         page.clickToCheckBox();
         page.clickToContinueButton();
 
-        boolean expected = true;
-        boolean actual = page.getErrorMassageNameElement(errorMessage).exists();
-
-
-        Assertions.assertEquals(expected,actual);
+      page.getErrorMassageNameElement(errorMessage);
 
     }
 
